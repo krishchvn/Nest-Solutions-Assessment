@@ -26,7 +26,7 @@
     'SELECT * FROM employees;'
     we can get all employee data.
     This looks like
-    ![alt text]server/submission/apiSchema/(images/image.png)
+    ![alt text](submission/apiSchema/images/image.png)
 
 ### 2. Get All Recognition Details
 
@@ -41,7 +41,7 @@
 
     I have joined both tables to get proper details of sender and reciever in same format as an employee
     and I get below result
-    ![alt text](server/submission/apiSchema/images/image-1.png)
+    ![alt text](submission/apiSchema/images/image-1.png)
 
 ## Queries for Analytics
 
@@ -56,7 +56,7 @@
     JOIN employees rec ON r.recipient_id = rec.id
     WHERE rec.team = 'Frontend';
 
-    ![alt text](server/submission/apiSchema/images/image-2.png)
+    ![alt text](submission/apiSchema/images/image-2.png)
 
 ### 4. Get Recognitions by Keywords (Ex: 'Great Job')
 
@@ -71,7 +71,7 @@
     JOIN employees rec ON r.recipient_id = rec.id
     WHERE r.message ILIKE '%Great job%';
 
-    ![alt text](server/submission/apiSchema/images/image-3.png)
+    ![alt text](submission/apiSchema/images/image-3.png)
 
 ### 5. Get Recognition Count of Each Employee
 
@@ -87,4 +87,4 @@
     GROUP BY id
     ORDER BY recognition_count DESC;
 
-    ![alt text](server/submission/apiSchema/images/image-4.png)
+    ![alt text](submission/apiSchema/images/image-4.png)
