@@ -1,6 +1,7 @@
 import { db } from './db.ts';
 import { analyticsResolvers } from './analytics.ts';
 import { pubsub, NOTIFY_RECIPIENT } from './pubsub.ts';
+import { deleteRecognitionById } from './query.ts';
 
 export const resolvers = {
 	Query: {
@@ -55,8 +56,6 @@ export const resolvers = {
 			);
 
 			const recognition = insertResult.rows[0];
-
-			// Fetch sender and recipient info
 			const senderResult = await db.query(
 				'SELECT * FROM employees WHERE id = $1',
 				[senderId]
@@ -71,6 +70,11 @@ export const resolvers = {
 				sender: senderResult.rows[0],
 				recipient: recipientResult.rows[0],
 			};
+		},
+
+		deleteRecognition: async (_: any, { id }: { id: number }, context: any) => {
+			const { user } = context;
+			return await deleteRecognitionById(id, user.id, user.role);
 		},
 	},
 

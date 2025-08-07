@@ -5,6 +5,7 @@ export const typeDefs = gql`
 		EMPLOYEE
 		MANAGER
 		TEAMLEAD
+		HR_ADMIN
 	}
 
 	enum Visibility {
@@ -56,6 +57,13 @@ export const typeDefs = gql`
 			emoji: String
 			visibility: Visibility!
 		): Recognition!
+
+		
+  		deleteRecognition(id: $id) {
+			success: Boolean
+			message: String
+		}
+}
 	}
 
 	type NotificationPayload {

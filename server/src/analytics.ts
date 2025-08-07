@@ -63,12 +63,12 @@ export async function getRecognitionsByGreatJob() {
 
 export async function getCountOfRecognitionLevels() {
 	const result = await db.query(`
-    SELECT id, COUNT(*) AS recognition_count
+    SELECT id as employee_id, COUNT(*) AS recognition_count
     FROM (
-      SELECT sender_id AS id FROM recognitions
+      SELECT sender_id AS id FROM recognitions  WHERE sender_id IS NOT NULL
       UNION ALL
-      SELECT recipient_id AS id FROM recognitions
-    ) AS all_participants
+      SELECT recipient_id AS id FROM recognitions WHERE recipient_id IS NOT NULL
+    ) AS all_participants 
     GROUP BY id
     ORDER BY recognition_count DESC;
   `);
@@ -177,7 +177,9 @@ export async function fetchRecognitionEngagementLevels(): Promise<
 	const result = await response.json();
 
 	if (result.errors) {
-		throw new Error(JSON.stringify(result.errors));
+		throw new Error(
+			JSON.stringify(result.errors) || 'Error while getting response'
+		);
 	}
 
 	return result.data.recognitionEngagementLevels;
