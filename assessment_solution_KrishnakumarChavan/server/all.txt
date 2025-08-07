@@ -1,0 +1,11 @@
+employees
+CREATE TABLE employees (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL, email VARCHAR(255) UNIQUE NOT NULL, role VARCHAR(20) CHECK (role IN ('EMPLOYEE', 'MANAGER', 'TEAMLEAD', 'HR_ADMIN')) DEFAULT 'EMPLOYEE', team VARCHAR(100), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+recognitions
+CREATE TABLE recognitions (id SERIAL PRIMARY KEY, sender_id INT REFERENCES employees(id), recipient_id INT REFERENCES employees(id), message TEXT, emoji VARCHAR(10), visibility VARCHAR(10) CHECK (visibility IN ('PUBLIC', 'PRIVATE', 'ANONYMOUS')) DEFAULT 'PUBLIC', created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+mock data in employees
+INSERT INTO employees (name, email, role, team) VALUES ('Name1', 'name1@nest.com', 'EMPLOYEE', 'ML'), ('Name2', 'name2@nest.com', 'MANAGER', 'Frontend'), ('Name3', 'name3@nest.com', 'TEAMLEAD', 'Backend'), ('Name4', 'name4@nest.com', 'EMPLOYEE', 'Backend');
+
+mock data in recognitions
+INSERT INTO recognitions (sender_id, recipient_id, message, emoji, visibility) VALUES (1, 2, 'Kudos!', ':)', 'PUBLIC'), (3, 1, 'Thanks!', ';)', 'PRIVATE'), (1, 1, 'Tap On Shoulder!', ':(', 'ANONYMOUS'), (2, 1, 'Congo', ':)', 'PUBLIC'), (3, 3, 'Appreciated!', ';)', 'PUBLIC');
