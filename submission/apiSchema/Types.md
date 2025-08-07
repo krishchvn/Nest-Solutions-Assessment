@@ -39,6 +39,7 @@
     	employee_id: ID!
     	recognition_count: Int!
     } // I have added this to query analytics for team engagement
+    // recognition_count is number of times employee has sent or recieved recognition
 
     type Query {
     	employees: [Employee!]!
@@ -57,7 +58,14 @@
     		emoji: String
     		visibility: Visibility!
     	): Recognition!
-    }  // This is type to send a recognition from an employer
+    	// This is type to send a recognition from an employer
+
+    	deleteRecognition(id: $id) {
+    		success: Boolean
+    		message: String
+    	}
+    	// This is mutation while deleting a recognition record
+    }
 
     type NotificationPayload {
     	recipientName: String!

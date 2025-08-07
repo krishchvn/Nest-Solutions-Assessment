@@ -1,0 +1,13 @@
+1. Input Validation
+SQL queries have enums and constraints such as CHECK keyword so as to invalidate irrelevant data
+and avoid SQL Injection to some level. 
+
+2. Reference Integrity
+UNIQUE constraint on employees.email prevents impersonation.
+Foreign Key relationship preserves referential integrity.
+
+3. Analytics Query for Engagement count uses aggregation for efficiency with UNION ALL and GROUP BY.
+We can indexes later to improve efficiency.
+
+4. Use of Graphql schema returns us only fields that are requested providing minimal overfetching and exposing data
+

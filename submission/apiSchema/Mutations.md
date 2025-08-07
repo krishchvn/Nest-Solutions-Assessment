@@ -32,3 +32,23 @@
 
     INSERT INTO recognitions (sender_id, recipient_id, message, emoji, visibility)
     VALUES (sender_id, recipient_id, message, emoji, visibility);
+
+### 2. Delete Recognitions
+
+    As per role based access control defined in AccessControlAndVisibility.md,
+    only manager and HR_Admin should be able to delete any recognition,
+    otherwise everyone can delete only their own recognitions.
+
+    I have implemented it in deleteRecognitionsById() function, which takes
+    three arguments,
+    1. Recognition ID (which can be fetched by frontend)
+    2. Current UserId (which can be fetched by logging info)
+    3. Current UserRole (which can be fetched by logging info or can be fetched from db)
+
+    and then after applying below condition we are able to acheive rbac
+    currentUserRole === 'MANAGER' || currentUserRole === 'HR_ADMIN' || (currentUserRole ===
+    'EMPLOYEE' && isOwner) || (currentUserRole === 'TEAMLEAD' && isOwner)
+    as per our access model.
+
+    I use below sql query to execute delete operation
+    DELETE FROM recognitions WHERE id = recognition_id;
